@@ -16,6 +16,20 @@ namespace NewsStand.UI.Home.ViewModels
 
         private DataLoader loader;
 
+        private string username;
+
+        public string Username
+        {
+            get { return username; }
+            set
+            {
+                if (username == value)
+                    return;
+                username = value;
+                NotifyOfPropertyChange(() => Username);
+            }
+        }
+
         public HomeViewModel()
         {
             this.loader = ServiceLocator.Current.GetInstance<DataLoader>();
@@ -26,6 +40,10 @@ namespace NewsStand.UI.Home.ViewModels
             base.OnActivate();
 
             this.settings = Serializer.Load<Settings>();
+
+            this.Username = settings.Username;
+
+            var followings = loader.LoadFollowings(settings.Username);
         }
     }
 }
