@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using Caliburn.Micro;
 
 namespace NewsStand
 {
@@ -12,5 +13,11 @@ namespace NewsStand
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            var windowManager = IoC.Get<IWindowManager>();
+        }
     }
 }
