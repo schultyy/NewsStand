@@ -60,7 +60,8 @@ namespace NewsStand.Infrastructure
                                Created = json["created"].ToObject<DateTime>(),
                                Quote = json["quote"].ToObject<string>(),
                                PlatformUrl = json["platform_url"].ToObject<string>(),
-                               UserId = json["user_id"].ToObject<int>()
+                               UserId = json["user_id"].ToObject<int>(),
+                               Url = json["article"]["url"].ToObject<string>()
                            };
             }
         }

@@ -16,5 +16,7 @@ namespace NewsStand.Model
         public DateTime Created { get; set; }
 
         public string PlatformUrl { get; set; }
+
+        public string Url { get; set; }
     }
 }

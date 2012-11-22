@@ -13,5 +13,22 @@
             <Binding StringFormat="Welcome back, {0}" Path="Username" />
         </TextBlock.Text>
         </TextBlock>
+        <ItemsControl ItemsSource="{Binding Recommendations}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <TextBlock Text="{Binding Quote}" FontSize="14" FontFamily="Courier New"
+                                   DockPanel.Dock="Top"/>
+                        <WebBrowser IsEnabled="False" DataContext="{Binding Url}"
+                                    DockPanel.Dock="Bottom"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </DockPanel>
 </UserControl>
