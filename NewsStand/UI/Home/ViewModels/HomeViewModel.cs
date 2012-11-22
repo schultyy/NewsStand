@@ -44,6 +44,11 @@ namespace NewsStand.UI.Home.ViewModels
             this.Username = settings.Username;
 
             var followings = loader.LoadFollowings(settings.Username);
+            var recommendations = new List<Recommendation>();
+            foreach (var following in followings.Followings)
+            {
+                recommendations.AddRange(loader.GetRecommendationsForUser(following.Username));
+            }
         }
     }
 }

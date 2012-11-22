@@ -84,6 +84,7 @@
     <Compile Include="Container.cs" />
     <Compile Include="Infrastructure\Converter.cs" />
     <Compile Include="Infrastructure\DataLoader.cs" />
+    <Compile Include="Model\Recommendation.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="UI\Home\ViewModels\HomeViewModel.cs" />
     <Compile Include="UI\Shell\ViewModels\UsernameViewModel.cs" />

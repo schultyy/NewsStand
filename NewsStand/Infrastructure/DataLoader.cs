@@ -27,7 +27,25 @@ namespace NewsStand.Infrastructure
 
             var json = JObject.Parse(content);
 
-            return Converter.FromJsonToUserWithFollowings(json);
+            return Converter.FromJson.ToUserWithFollowings(json);
+        }
+
+        public Recommendation[] GetRecommendationsForUser(string username, int pagesize = 100, int page = 0)
+        {
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException("username");
+
+            var request =
+                WebRequest.Create(string.Format("https://quote.fm/api/recommendation/listByUser?username={0}&scope=time", username));
+
+            string content = null;
+
+            using (var reader = new StreamReader(request.GetResponse().GetResponseStream()))
+                content = reader.ReadToEnd();
+
+            var json = JObject.Parse(content);
+
+            return Converter.FromJson.ToRecommendations(json);
         }
     }
 }
