@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
+using NewsStand.Configuration;
+using NewsStand.UI.Shell.ViewModels;
 
 namespace NewsStand
 {
@@ -17,7 +19,12 @@ namespace NewsStand
         {
             base.OnStartup(e);
 
+            var boot = new AppBootstrapper();
+
+            Serializer.CheckFolder();
+
             var windowManager = IoC.Get<IWindowManager>();
+            windowManager.ShowDialog(new ShellViewModel());
         }
     }
 }

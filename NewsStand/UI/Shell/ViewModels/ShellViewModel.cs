@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Caliburn.Micro;
+using NewsStand.Configuration;
+using NewsStand.UI.Home.ViewModels;
 
 namespace NewsStand.UI.Shell.ViewModels
 {
-    public class ShellViewModel : Screen
+    public sealed class ShellViewModel : Conductor<Screen>.Collection.OneActive
     {
         public override string DisplayName
         {
@@ -18,6 +20,28 @@ namespace NewsStand.UI.Shell.ViewModels
             {
                 base.DisplayName = value;
             }
+        }
+
+        public ShellViewModel()
+        {
+            if (Serializer.Load<Settings>() == null)
+            {
+                var usernameModel = new UsernameViewModel();
+                usernameModel.Closed += (o, e) =>
+                                            {
+                                                Serializer.Save(new Settings() { Username = e.Username });
+                                                ActivateItem(new HomeViewModel());
+                                            };
+                ActivateItem(usernameModel);
+            }
+            else
+                ActivateItem(new HomeViewModel());
+        }
+
+        public override void CanClose(Action<bool> callback)
+        {
+            base.CanClose(callback);
+            System.Diagnostics.Debug.WriteLine("Can close");
         }
     }
 }
