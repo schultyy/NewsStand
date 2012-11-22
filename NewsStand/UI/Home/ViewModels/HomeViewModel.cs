@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Caliburn.Micro;
+using Microsoft.Practices.ServiceLocation;
 using NewsStand.Configuration;
+using NewsStand.Infrastructure;
+using NewsStand.Model;
 
 namespace NewsStand.UI.Home.ViewModels
 {
@@ -11,9 +14,11 @@ namespace NewsStand.UI.Home.ViewModels
     {
         private Settings settings;
 
+        private DataLoader loader;
+
         public HomeViewModel()
         {
-
+            this.loader = ServiceLocator.Current.GetInstance<DataLoader>();
         }
 
         protected override void OnActivate()
