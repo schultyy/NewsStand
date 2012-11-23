@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace NewsStand.Infrastructure
 {
-    public class DataLoader
+    public class DataLoader : IDataLoader
     {
         public UserWithFollowings LoadFollowings(string username)
         {
@@ -30,13 +30,14 @@ namespace NewsStand.Infrastructure
             return Converter.FromJson.ToUserWithFollowings(json);
         }
 
-        public Recommendation[] GetRecommendationsForUser(string username, int pagesize = 100, int page = 0)
+        public Recommendation[] GetRecommendationsForUser(string username, int pagesize = 5, int page = 0)
         {
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException("username");
 
             var request =
-                WebRequest.Create(string.Format("https://quote.fm/api/recommendation/listByUser?username={0}&scope=time", username));
+                WebRequest.Create(string.Format("https://quote.fm/api/recommendation/listByUser?username={0}&scope=time&pagesize={1}&page={2}",
+                                                    username, pagesize, page));
 
             string content = null;
 

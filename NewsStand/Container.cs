@@ -5,6 +5,7 @@ using System.Text;
 using Caliburn.Micro;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
+using NewsStand.Infrastructure;
 
 namespace NewsStand
 {
@@ -16,6 +17,7 @@ namespace NewsStand
 
             container.RegisterInstance<IWindowManager>(new WindowManager());
             container.RegisterInstance<IEventAggregator>(new EventAggregator());
+            container.RegisterType<IDataLoader, MockLoader>();
 
             foreach (Type t in typeof(Screen).Assembly.GetTypes().Where(t => typeof(Screen).IsAssignableFrom(t)))
                 container.RegisterType(t);

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.SqlTypes;
@@ -18,7 +17,7 @@ namespace NewsStand.UI.Home.ViewModels
     {
         private Settings settings;
 
-        private DataLoader loader;
+        private readonly IDataLoader loader;
 
         private string username;
 
@@ -64,7 +63,7 @@ namespace NewsStand.UI.Home.ViewModels
 
         public HomeViewModel()
         {
-            this.loader = ServiceLocator.Current.GetInstance<DataLoader>();
+            this.loader = ServiceLocator.Current.GetInstance<IDataLoader>();
             Recommendations = new BindableCollection<RecommendationViewModel>();
         }
 
@@ -102,65 +101,7 @@ namespace NewsStand.UI.Home.ViewModels
                                              Url = recommendation.Url,
                                              User = User.Followings.Single(c => c.Id == recommendation.UserId)
                                          });
-        }
-    }
-
-    public class RecommendationViewModel : PropertyChangedBase
-    {
-        private string quote;
-
-        public string Quote
-        {
-            get { return quote; }
-            set
-            {
-                if (quote == value)
-                    return;
-                quote = value;
-                NotifyOfPropertyChange(() => Quote);
-            }
-        }
-
-        private DateTime created;
-
-        public DateTime Created
-        {
-            get { return created; }
-            set
-            {
-                if (created == value)
-                    return;
-                created = value;
-                NotifyOfPropertyChange(() => Created);
-            }
-        }
-
-        private User user;
-
-        public User User
-        {
-            get { return user; }
-            set
-            {
-                if (user == value)
-                    return;
-                user = value;
-                NotifyOfPropertyChange(() => User);
-            }
-        }
-
-        private string url;
-
-        public string Url
-        {
-            get { return url; }
-            set
-            {
-                if (url == value)
-                    return;
-                url = value;
-                NotifyOfPropertyChange(() => Url);
-            }
+            this.Recommendations = new BindableCollection<RecommendationViewModel>(Recommendations.OrderBy(c => c.Created));
         }
     }
 }

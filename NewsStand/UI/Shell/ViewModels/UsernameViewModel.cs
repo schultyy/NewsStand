@@ -1,5 +1,4 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 
 namespace NewsStand.UI.Shell.ViewModels
 {
@@ -39,10 +38,5 @@ namespace NewsStand.UI.Shell.ViewModels
         {
             Closed(this, new ClosedEventArgs { Username = Username });
         }
-    }
-
-    public class ClosedEventArgs : EventArgs
-    {
-        public string Username { get; set; }
     }
 }

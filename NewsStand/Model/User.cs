@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -23,10 +22,5 @@ namespace NewsStand.Model
         public string Location { get; set; }
 
         public string PlatformUrl { get; set; }
-    }
-
-    public class UserWithFollowings : User
-    {
-        public ObservableCollection<User> Followings { get; set; }
     }
 }
