@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Interactivity;
 
 namespace NewsStand.UI.Behaviors
@@ -21,7 +22,10 @@ namespace NewsStand.UI.Behaviors
 
         void AssociatedObject_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Process.Start(AssociatedObject.Content.ToString());
+            if (AssociatedObject.Content is Run)
+                Process.Start(((Run)AssociatedObject.Content).Text);
+            else
+                Process.Start(AssociatedObject.Content.ToString());
         }
     }
 }
