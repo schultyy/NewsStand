@@ -37,18 +37,23 @@ namespace NewsStand.Infrastructure
 
         public Recommendation[] GetRecommendationsForUser(string username, int pagesize = 5, int page = 0)
         {
-            return new Recommendation[]
+            if (username == "pjohnson")
+                return new[]
+                           {
+                               new Recommendation
+                                   {
+                                       Created = DateTime.Today,
+                                       Url = "http://example.org/",
+                                       Id = 34,
+                                       Quote = "You just have to do something",
+                                       UserId = 342,
+                                       ArticleTitle = "Article title"
+                                   }
+                           };
+            else
+                return new[]
                        {
                            new Recommendation
-                               {
-                                   Created = DateTime.Today,
-                                   Url = "http://example.org/",
-                                   Id = 34,
-                                   Quote = "You just have to do something",
-                                   UserId = 342,
-                                   ArticleTitle = "Article title"
-                               },
-                               new Recommendation
                                {
                                    Created = DateTime.Today.AddDays(-1),
                                    Url = "http://example.org/Foo",

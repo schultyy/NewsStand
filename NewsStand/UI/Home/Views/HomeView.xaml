@@ -40,7 +40,11 @@
                                    DockPanel.Dock="Top" Margin="10" Foreground="White" />
                             <StackPanel Orientation="Horizontal"
                                         DockPanel.Dock="Bottom">
-                                <TextBlock Text="{Binding Url}" Margin="5" />
+                                <Label Foreground="Blue" Margin="5" FontStyle="Italic">
+                                    <Label.Content>
+                                        <Run Text="{Binding Url}" />
+                                    </Label.Content>
+                                </Label>
                             </StackPanel>
                         </DockPanel>
                     </Border>
