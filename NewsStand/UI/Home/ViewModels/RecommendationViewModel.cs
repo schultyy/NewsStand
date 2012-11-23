@@ -61,5 +61,19 @@ namespace NewsStand.UI.Home.ViewModels
                 NotifyOfPropertyChange(() => Url);
             }
         }
+
+        private string articleTitle;
+
+        public string ArticleTitle
+        {
+            get { return articleTitle; }
+            set
+            {
+                if (articleTitle == value)
+                    return;
+                articleTitle = value;
+                NotifyOfPropertyChange(() => ArticleTitle);
+            }
+        }
     }
 }

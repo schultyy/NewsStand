@@ -17,18 +17,31 @@
                       ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid />
+                    <StackPanel />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border CornerRadius="2" BorderBrush="#F0F0F0" Background="White" BorderThickness="2"
-                            Width="400" Margin="5">
+                             Margin="5">
                         <DockPanel>
-                            <TextBlock Text="{Binding User.Fullname}" DockPanel.Dock="Top" FontFamily="Arial" />
-                            <TextBlock Text="{Binding Quote}" FontSize="14" FontFamily="Courier New"
+                            <TextBlock DockPanel.Dock="Top" FontFamily="Arial"
+                                       Margin="5">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} recommended: {1}">
+                                        <Binding Path="User.Fullname" />
+                                        <Binding Path="ArticleTitle" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock Text="{Binding Quote}" FontSize="16" FontFamily="Courier New"
+                                   Background="#B913A0CF"
                                    TextAlignment="Left" TextWrapping="Wrap"
-                                   DockPanel.Dock="Top"/>
+                                   DockPanel.Dock="Top" Margin="10" Foreground="White" />
+                            <StackPanel Orientation="Horizontal"
+                                        DockPanel.Dock="Bottom">
+                                <TextBlock Text="{Binding Url}" Margin="5" />
+                            </StackPanel>
                         </DockPanel>
                     </Border>
                 </DataTemplate>

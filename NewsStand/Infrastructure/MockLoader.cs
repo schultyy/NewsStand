@@ -45,7 +45,8 @@ namespace NewsStand.Infrastructure
                                    Url = "http://example.org/",
                                    Id = 34,
                                    Quote = "You just have to do something",
-                                   UserId = 342
+                                   UserId = 342,
+                                   ArticleTitle = "Article title"
                                },
                                new Recommendation
                                {
@@ -53,7 +54,8 @@ namespace NewsStand.Infrastructure
                                    Url = "http://example.org/Foo",
                                    Id = 34432,
                                    Quote = "You just have to do something - blah blah blah",
-                                   UserId = 653
+                                   UserId = 653,
+                                   ArticleTitle = "Blah foo Bar"
                                }
                        };
         }
