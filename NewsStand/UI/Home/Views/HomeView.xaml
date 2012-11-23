@@ -36,10 +36,13 @@
                                     </MultiBinding>
                                 </TextBlock.Text>
                             </TextBlock>
-                            <TextBlock Text="{Binding Quote}" FontSize="16" FontFamily="Courier New"
-                                   Background="#B913A0CF"
-                                   TextAlignment="Left" TextWrapping="Wrap"
-                                   DockPanel.Dock="Top" Margin="10" Foreground="White" />
+                            <TextBlock FontSize="16" FontFamily="Times New Roman"
+                                           DockPanel.Dock="Top" Margin="10"
+                                   TextAlignment="Left" TextWrapping="Wrap">
+                                    <TextBlock.Text>
+                                        <Binding Path="Quote" StringFormat="{}&quot;{0}&quot;" />
+                                    </TextBlock.Text>
+                            </TextBlock>
                             <StackPanel Orientation="Horizontal"
                                         DockPanel.Dock="Bottom">
                                 <Label Foreground="Blue" Margin="5" FontStyle="Italic">
