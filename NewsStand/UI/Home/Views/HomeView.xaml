@@ -70,6 +70,7 @@
                                                 <behaviors:LabelClickBehavior />
                                             </i:Interaction.Behaviors>
                                         </Label>
+                                        <TextBlock Text="{Binding Created, ConverterCulture=de-DE}" Margin="5 0 0 0" />
                                     </StackPanel>
                                 </DockPanel>
                             </Border>

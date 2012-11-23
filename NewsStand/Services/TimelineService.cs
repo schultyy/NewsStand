@@ -24,7 +24,7 @@ namespace NewsStand.Services
 
             return allRecommendations
                 //.Where(c => c.Created.Date == DateTime.Today)
-                .OrderBy(c => c.Created)
+                .OrderByDescending(c => c.Created)
                 .ToArray();
         }
     }
