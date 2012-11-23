@@ -13,16 +13,24 @@ namespace NewsStand.Infrastructure
         {
             return new UserWithFollowings
                        {
-                           Username = "pjohnson",
-                           Fullname = "Peter Johnson",
+                           Id = 534,
+                           Username = "schultyy",
+                           Fullname = "schultyy",
                            Bio = "Blah blah blah",
                            Followings = new ObservableCollection<User>
                                             {
                                                 new User()
                                                     {
+                                                        Id = 653,
                                                         Username = "jdoe",
                                                         Fullname = "John Doe"
-                                                    }
+                                                    },
+                                                    new User()
+                                                        {
+                                                            Id = 342,
+                                                            Username = "pjohnson",
+                                                            Fullname = "Peter Johnson"
+                                                        }
                                             }
                        };
         }
@@ -37,7 +45,7 @@ namespace NewsStand.Infrastructure
                                    Url = "http://example.org/",
                                    Id = 34,
                                    Quote = "You just have to do something",
-                                   UserId = 3452
+                                   UserId = 342
                                },
                                new Recommendation
                                {
@@ -45,7 +53,7 @@ namespace NewsStand.Infrastructure
                                    Url = "http://example.org/Foo",
                                    Id = 34432,
                                    Quote = "You just have to do something - blah blah blah",
-                                   UserId = 3867
+                                   UserId = 653
                                }
                        };
         }

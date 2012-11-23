@@ -81,12 +81,11 @@ namespace NewsStand.UI.Home.ViewModels
 
             backgroundWorker.DoWork += (o, e) =>
                                            {
-                                               foreach (var item in User.Followings.Select(following => loader.GetRecommendationsForUser(following.Username)).SelectMany(recommendations1 => recommendations1))
+                                               foreach (var following in User.Followings)
                                                {
-                                                   var item1 = item;
-                                                   Dispatcher.CurrentDispatcher.Invoke(
-                                                       new System.Action(() => AddModel(item1)),
-                                                       DispatcherPriority.DataBind);
+                                                   var recommendationsForUser = loader.GetRecommendationsForUser(following.Username);
+                                                   foreach (var recommendation in recommendationsForUser)
+                                                       AddModel(recommendation);
                                                }
                                            };
             backgroundWorker.RunWorkerAsync();
