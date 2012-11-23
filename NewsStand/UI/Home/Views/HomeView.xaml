@@ -29,15 +29,15 @@
                         <DockPanel>
                             <StackPanel Margin="5" DockPanel.Dock="Top"
                                         Orientation="Horizontal">
-                                <TextBlock Text="{Binding User.Fullname}" />
-                                <TextBlock Text=" recommended " />
-                                <Label Foreground="Blue" FontStyle="Italic">
-                                    <Label.Content>
-                                        <Run Text="{Binding ArticleTitle}" />
-                                    </Label.Content>
-                                    <i:Interaction.Behaviors>
-                                        <behaviors:LabelClickBehavior />
-                                    </i:Interaction.Behaviors>
+                                <TextBlock Text="{Binding User.Fullname}" Margin="0 5 0 0" />
+                                <TextBlock Text=" recommended " Margin="0 5 0 0" />
+                                <Label Margin="0">
+                                    <Hyperlink NavigateUri="{Binding Url}">
+                                        <i:Interaction.Behaviors>
+                                            <behaviors:HyperlinkNavigationBehavior />
+                                        </i:Interaction.Behaviors>
+                                        <TextBlock Text="{Binding ArticleTitle}" />
+                                    </Hyperlink>
                                 </Label>
                             </StackPanel>
                             <TextBlock FontSize="16" FontFamily="Times New Roman"
