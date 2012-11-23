@@ -89,6 +89,7 @@
     <Compile Include="Model\Recommendation.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserWithFollowings.cs" />
+    <Compile Include="UI\Behaviors\LabelClickBehavior.cs" />
     <Compile Include="UI\Home\ViewModels\HomeViewModel.cs" />
     <Compile Include="UI\Home\ViewModels\RecommendationViewModel.cs" />
     <Compile Include="UI\Shell\ViewModels\ClosedEventArgs.cs" />
