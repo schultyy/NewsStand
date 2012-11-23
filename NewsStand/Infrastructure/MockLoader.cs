@@ -47,7 +47,9 @@ namespace NewsStand.Infrastructure
                                        Id = 34,
                                        Quote = "You just have to do something",
                                        UserId = 342,
-                                       ArticleTitle = "Article title"
+                                       ArticleTitle = "Article title",
+                                       WebsiteUrl = "http://example.org",
+                                       WebsiteTitle = "example.org"
                                    }
                            };
             else
@@ -60,7 +62,9 @@ namespace NewsStand.Infrastructure
                                    Id = 34432,
                                    Quote = "You just have to do something - blah blah blah",
                                    UserId = 653,
-                                   ArticleTitle = "Blah foo Bar"
+                                   ArticleTitle = "Blah foo Bar",
+                                   WebsiteUrl = "http://example.org",
+                                       WebsiteTitle = "example.org"
                                }
                        };
         }

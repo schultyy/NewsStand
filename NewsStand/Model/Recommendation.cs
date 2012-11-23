@@ -20,5 +20,9 @@ namespace NewsStand.Model
         public string Url { get; set; }
 
         public string ArticleTitle { get; set; }
+
+        public string WebsiteUrl { get; set; }
+
+        public string WebsiteTitle { get; set; }
     }
 }

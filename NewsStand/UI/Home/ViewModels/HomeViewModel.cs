@@ -99,7 +99,9 @@ namespace NewsStand.UI.Home.ViewModels
                                              Quote = recommendation.Quote,
                                              Url = recommendation.Url,
                                              User = User.Followings.Single(c => c.Id == recommendation.UserId),
-                                             ArticleTitle = recommendation.ArticleTitle
+                                             ArticleTitle = recommendation.ArticleTitle,
+                                             WebsiteTitle = recommendation.WebsiteTitle,
+                                             WebsiteUrl = recommendation.WebsiteUrl
                                          });
             this.Recommendations = new BindableCollection<RecommendationViewModel>(Recommendations.OrderBy(c => c.Created));
         }
