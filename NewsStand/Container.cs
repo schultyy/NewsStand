@@ -6,6 +6,7 @@ using Caliburn.Micro;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using NewsStand.Infrastructure;
+using NewsStand.Services;
 
 namespace NewsStand
 {
@@ -17,7 +18,8 @@ namespace NewsStand
 
             container.RegisterInstance<IWindowManager>(new WindowManager());
             container.RegisterInstance<IEventAggregator>(new EventAggregator());
-            container.RegisterType<IDataLoader, MockLoader>();
+            container.RegisterType<IDataLoader, DataLoader>();
+            container.RegisterType<ITimelineService, TimelineService>();
 
             foreach (Type t in typeof(Screen).Assembly.GetTypes().Where(t => typeof(Screen).IsAssignableFrom(t)))
                 container.RegisterType(t);

@@ -68,6 +68,12 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.1.8.0\lib\net40\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.1.8.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -89,6 +95,8 @@
     <Compile Include="Model\Recommendation.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserWithFollowings.cs" />
+    <Compile Include="Services\ITimelineService.cs" />
+    <Compile Include="Services\TimelineService.cs" />
     <Compile Include="UI\Behaviors\HyperlinkNavigationBehavior.cs" />
     <Compile Include="UI\Behaviors\LabelClickBehavior.cs" />
     <Compile Include="UI\Home\ViewModels\HomeViewModel.cs" />

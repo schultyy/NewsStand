@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.SqlTypes;
@@ -10,6 +11,8 @@ using Microsoft.Practices.ServiceLocation;
 using NewsStand.Configuration;
 using NewsStand.Infrastructure;
 using NewsStand.Model;
+using NewsStand.Services;
+using Xceed.Wpf.DataGrid.Converters;
 
 namespace NewsStand.UI.Home.ViewModels
 {
@@ -61,6 +64,20 @@ namespace NewsStand.UI.Home.ViewModels
             }
         }
 
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                if (isBusy == value)
+                    return;
+                isBusy = value;
+                NotifyOfPropertyChange(() => IsBusy);
+            }
+        }
+
         public HomeViewModel()
         {
             this.loader = ServiceLocator.Current.GetInstance<IDataLoader>();
@@ -71,29 +88,49 @@ namespace NewsStand.UI.Home.ViewModels
         {
             base.OnActivate();
 
-            this.settings = Serializer.Load<Settings>();
+            settings = Serializer.Load<Settings>();
 
-            this.Username = settings.Username;
+            Username = settings.Username;
 
             User = loader.LoadFollowings(settings.Username);
 
             var backgroundWorker = new BackgroundWorker();
 
+            IsBusy = true;
+
             backgroundWorker.DoWork += (o, e) =>
                                            {
-                                               foreach (var following in User.Followings)
+                                               var timeLine = ServiceLocator.Current.GetInstance<ITimelineService>()
+                                                   .GetTimeLineForToday(User.Username);
+
+                                               foreach (var recommendation in timeLine.Where(c => c.Created.Date == DateTime.Today))
                                                {
-                                                   var recommendationsForUser = loader.GetRecommendationsForUser(following.Username);
-                                                   foreach (var recommendation in recommendationsForUser)
-                                                       AddModel(recommendation);
+                                                   var local = recommendation;
+                                                   Dispatcher.CurrentDispatcher.Invoke(
+                                                       new System.Action(() => AddModel(local)),
+                                                       DispatcherPriority.DataBind);
+                                               }
+                                               IsBusy = false;
+
+                                               foreach (var recommendation in timeLine.Where(c => c.Created.Date != DateTime.Today))
+                                               {
+                                                   var local = recommendation;
+                                                   Dispatcher.CurrentDispatcher.Invoke(
+                                                       new System.Action(() => AddModel(local)),
+                                                       DispatcherPriority.DataBind);
                                                }
                                            };
+            backgroundWorker.RunWorkerCompleted += (o, e) =>
+                                                       {
+                                                           IsBusy = false;
+                                                       };
             backgroundWorker.RunWorkerAsync();
+
         }
 
         private void AddModel(Recommendation recommendation)
         {
-            this.Recommendations.Add(new RecommendationViewModel
+            recommendations.Add(new RecommendationViewModel
                                          {
                                              Created = recommendation.Created,
                                              Quote = recommendation.Quote,
@@ -103,7 +140,6 @@ namespace NewsStand.UI.Home.ViewModels
                                              WebsiteTitle = recommendation.WebsiteTitle,
                                              WebsiteUrl = recommendation.WebsiteUrl
                                          });
-            this.Recommendations = new BindableCollection<RecommendationViewModel>(Recommendations.OrderBy(c => c.Created));
         }
     }
 }
