@@ -81,6 +81,8 @@ namespace NewsStand.UI.ReadLater.ViewModels
             var context = TaskScheduler.FromCurrentSynchronizationContext();
             IsBusy = true;
 
+            Recommendations.Clear();
+
             Task.Factory.StartNew(() =>
                                       {
                                           var users = dataLoader.LoadFollowings(settings.Username);
