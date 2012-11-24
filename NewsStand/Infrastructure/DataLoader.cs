@@ -48,5 +48,19 @@ namespace NewsStand.Infrastructure
 
             return Converter.FromJson.ToRecommendations(json);
         }
+
+        public Recommendation GetRecommendationById(int id)
+        {
+            var request = WebRequest.Create(string.Format("https://quote.fm/api/recommendation/get?id={0}", id));
+
+            string content = null;
+
+            using (var reader = new StreamReader(request.GetResponse().GetResponseStream()))
+                content = reader.ReadToEnd();
+
+            var json = JObject.Parse(content);
+
+            return Converter.FromJson.ToRecommendation(json);
+        }
     }
 }

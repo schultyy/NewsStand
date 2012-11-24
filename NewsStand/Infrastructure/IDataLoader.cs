@@ -6,5 +6,6 @@ namespace NewsStand.Infrastructure
     {
         UserWithFollowings LoadFollowings(string username);
         Recommendation[] GetRecommendationsForUser(string username, int pagesize = 5, int page = 0);
+        Recommendation GetRecommendationById(int id);
     }
 }

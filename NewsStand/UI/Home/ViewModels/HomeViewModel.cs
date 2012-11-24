@@ -152,21 +152,8 @@ namespace NewsStand.UI.Home.ViewModels
 
         private void AddModel(Recommendation recommendation, bool isRead)
         {
-            var user = User.Followings.Single(c => c.Id == recommendation.UserId);
-            var avatar = avatarService.LoadAvatar(user.AvatarUrl);
-            recommendations.Add(new RecommendationViewModel
-                                         {
-                                             Created = recommendation.Created,
-                                             Quote = recommendation.Quote,
-                                             Url = recommendation.Url,
-                                             User = user,
-                                             ArticleTitle = recommendation.ArticleTitle,
-                                             WebsiteTitle = recommendation.WebsiteTitle,
-                                             WebsiteUrl = recommendation.WebsiteUrl,
-                                             Avatar = avatar,
-                                             Id = recommendation.Id,
-                                             IsRead = isRead
-                                         });
+            var currentUser = User.Followings.Single(c => c.Id == recommendation.UserId);
+            Recommendations.Add(RecommendationViewModel.FromModel(recommendation, currentUser, isRead));
         }
     }
 }

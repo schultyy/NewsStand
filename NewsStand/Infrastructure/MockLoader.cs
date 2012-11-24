@@ -68,5 +68,10 @@ namespace NewsStand.Infrastructure
                                }
                        };
         }
+
+        public Recommendation GetRecommendationById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

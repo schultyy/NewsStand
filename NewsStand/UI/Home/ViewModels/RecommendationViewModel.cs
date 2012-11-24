@@ -5,6 +5,7 @@ using Caliburn.Micro;
 using Microsoft.Practices.ServiceLocation;
 using NewsStand.Infrastructure;
 using NewsStand.Model;
+using NewsStand.Services;
 using Xceed.Wpf.DataGrid.Converters;
 
 namespace NewsStand.UI.Home.ViewModels
@@ -157,6 +158,24 @@ namespace NewsStand.UI.Home.ViewModels
                     readManager.MarkAsUnread(Id);
                 }
             }
+        }
+
+        public static RecommendationViewModel FromModel(Recommendation model, User user, bool isRead = false)
+        {
+            var avatar = ServiceLocator.Current.GetInstance<IAvatarService>().LoadAvatar(user.AvatarUrl);
+            return new RecommendationViewModel
+            {
+                Created = model.Created,
+                Quote = model.Quote,
+                Url = model.Url,
+                User = user,
+                ArticleTitle = model.ArticleTitle,
+                WebsiteTitle = model.WebsiteTitle,
+                WebsiteUrl = model.WebsiteUrl,
+                Avatar = avatar,
+                Id = model.Id,
+                IsRead = isRead
+            };
         }
     }
 }
