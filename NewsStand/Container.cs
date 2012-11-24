@@ -20,7 +20,7 @@ namespace NewsStand
             container.RegisterInstance<IEventAggregator>(new EventAggregator());
             container.RegisterType<IDataLoader, DataLoader>();
             container.RegisterType<ITimelineService, TimelineService>();
-            container.RegisterType<IReadLaterManager, ReadLaterManager>();
+            container.RegisterInstance<IReadLaterManager>(new ReadLaterManager());
             container.RegisterType<IReadManager, ReadManager>();
             container.RegisterInstance<IAvatarService>(new AvatarService());
 
