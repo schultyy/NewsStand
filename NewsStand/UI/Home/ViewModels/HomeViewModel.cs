@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data.SqlTypes;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
+using System.Windows.Input;
 using Caliburn.Micro;
 using Microsoft.Practices.ServiceLocation;
 using NewsStand.Configuration;
 using NewsStand.Infrastructure;
 using NewsStand.Model;
 using NewsStand.Services;
-using Xceed.Wpf.DataGrid.Converters;
 
 namespace NewsStand.UI.Home.ViewModels
 {
@@ -111,55 +104,68 @@ namespace NewsStand.UI.Home.ViewModels
 
             Username = settings.Username;
 
+            LoadRecommendations();
+        }
+
+        public void LoadRecommendations()
+        {
             User = loader.LoadFollowings(settings.Username);
 
             IsBusy = true;
 
+            Recommendations.Clear();
+
             var context = TaskScheduler.FromCurrentSynchronizationContext();
 
             var task = Task.Factory.StartNew(() =>
-                                                  {
-                                                      var timeLine = ServiceLocator.Current.GetInstance
-                                                          <ITimelineService>()
-                                                          .GetTimeLineForToday(User.Username);
+                                                 {
+                                                     var timeLine = ServiceLocator.Current.GetInstance
+                                                         <ITimelineService>()
+                                                         .GetTimeLineForToday(User.Username);
 
-                                                      var token = Task.Factory.CancellationToken;
+                                                     var token = Task.Factory.CancellationToken;
 
-                                                      Task.Factory.StartNew(() =>
-                                                                                {
-                                                                                    foreach (
-                                                                                        var recommendation in
-                                                                                            timeLine.Where(
-                                                                                                c =>
-                                                                                                c.Created.Date ==
-                                                                                                DateTime.Today))
-                                                                                    {
-                                                                                        var local = recommendation;
+                                                     Task.Factory.StartNew(() =>
+                                                                               {
+                                                                                   foreach (
+                                                                                       var recommendation in
+                                                                                           timeLine.Where(
+                                                                                               c =>
+                                                                                               c.Created.Date ==
+                                                                                               DateTime.Today))
+                                                                                   {
+                                                                                       var local = recommendation;
 
-                                                                                        AddModel(local);
-                                                                                    }
-                                                                                }, token, TaskCreationOptions.None,
-                                                                            context).ContinueWith(_ => IsBusy = false, context);
+                                                                                       AddModel(local);
+                                                                                   }
+                                                                               }, token, TaskCreationOptions.None,
+                                                                           context).ContinueWith(_ => IsBusy = false, context);
 
 
+                                                     Task.Factory.StartNew(() =>
+                                                                               {
+                                                                                   foreach (
+                                                                                       var recommendation in
+                                                                                           timeLine.Where(
+                                                                                               c =>
+                                                                                               c.Created.Date !=
+                                                                                               DateTime.Today))
+                                                                                   {
+                                                                                       var local = recommendation;
 
-                                                      Task.Factory.StartNew(() =>
-                                                                                {
-                                                                                    foreach (
-                                                                                        var recommendation in
-                                                                                            timeLine.Where(
-                                                                                                c =>
-                                                                                                c.Created.Date !=
-                                                                                                DateTime.Today))
-                                                                                    {
-                                                                                        var local = recommendation;
+                                                                                       AddModel(local);
+                                                                                   }
+                                                                               }, token, TaskCreationOptions.None,
+                                                                           context);
+                                                 });
+        }
 
-                                                                                        AddModel(local);
-                                                                                    }
-                                                                                }, token, TaskCreationOptions.None,
-                                                                            context);
-                                                  });
-
+        public void OnKeyDown(KeyEventArgs args)
+        {
+            if(args.Key == Key.F5)
+            {
+                LoadRecommendations();
+            }
         }
 
         private void AddModel(Recommendation recommendation)

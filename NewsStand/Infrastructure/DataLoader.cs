@@ -36,7 +36,7 @@ namespace NewsStand.Infrastructure
                 throw new ArgumentNullException("username");
 
             var request =
-                WebRequest.Create(string.Format("https://quote.fm/api/recommendation/listByUser?username={0}&scope=time&pagesize={1}&page={2}",
+                WebRequest.Create(string.Format("https://quote.fm/api/recommendation/listByUser?username={0}&scope=time&pageSize={1}&page={2}",
                                                     username, pagesize, page));
 
             string content = null;
