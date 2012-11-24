@@ -9,7 +9,7 @@
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <toolkit:BusyIndicator IsBusy="{Binding IsBusy}" BusyContent="Be so kind and wait while newsstand is processing your timeline...">
+    <toolkit:BusyIndicator IsBusy="{Binding IsBusy}" BusyContent="Processing timeline...">
         <DockPanel LastChildFill="True">
             <!--<Expander Header="Options" DockPanel.Dock="Top" Margin="5">
                 <StackPanel>
@@ -17,7 +17,7 @@
                               Margin="10 5 5 5"/>
                 </StackPanel>
             </Expander>-->
-            <StackPanel DockPanel.Dock="Top">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Reload" 
                         cal:Message.Attach="LoadRecommendations"
                         Width="100"
