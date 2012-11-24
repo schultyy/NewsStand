@@ -10,7 +10,7 @@ For performance reasons I only download the latest 5 recommendations / user. If 
 	⁃	Mark recommendations for later reading (does not sync with website)
 # Requirements
 	## For usage
-You need to install .Net 4 Client Profile. That should be all.
+	⁃	You need to install .Net 4 Client Profile. That should be all.
 ## For development
 	⁃	Git
 	⁃	Visual Studio 2010
