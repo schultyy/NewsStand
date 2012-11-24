@@ -22,7 +22,7 @@ namespace NewsStand.Infrastructure
 
         public ReadLaterManager()
         {
-            readLater = new List<int>();
+            readLater = Load();
         }
 
         ~ReadLaterManager()
