@@ -12,31 +12,33 @@ namespace NewsStand.Infrastructure
     {
         private const string readFilename = "ReadRecommendations.bin";
 
-        public void MarkAsRead(int recommendationId)
+        private readonly List<int> readRecommendations;
+
+        public ReadManager()
         {
-            var items = GetReadRecommendations() ?? new List<int>();
-            if (items.Contains(recommendationId))
-                return;
-            items.Add(recommendationId);
+            readRecommendations = GetReadRecommendations() ?? new List<int>();
+        }
+
+        ~ReadManager()
+        {
             using (Stream stream = File.OpenWrite(Path.Combine(Serializer.GetRootDirectory(), readFilename)))
             {
                 var formatter = new BinaryFormatter();
-                formatter.Serialize(stream, items);
+                formatter.Serialize(stream, readRecommendations);
             }
+        }
+
+        public void MarkAsRead(int recommendationId)
+        {
+            if (readRecommendations.Contains(recommendationId))
+                return;
+            readRecommendations.Add(recommendationId);
         }
 
         public void MarkAsUnread(int recommendationId)
         {
-            var items = GetReadRecommendations() ?? new List<int>();
-            if (items.Contains(recommendationId))
-            {
-                items.Remove(recommendationId);
-                using (Stream stream = File.OpenWrite(Path.Combine(Serializer.GetRootDirectory(), readFilename)))
-                {
-                    var formatter = new BinaryFormatter();
-                    formatter.Serialize(stream, items);
-                }
-            }
+            if (readRecommendations.Contains(recommendationId))
+                readRecommendations.Remove(recommendationId);
         }
 
         public List<int> GetReadRecommendations()
@@ -50,6 +52,11 @@ namespace NewsStand.Infrastructure
                 }
             }
             return null;
+        }
+
+        public bool IsRead(int recommendationId)
+        {
+            return readRecommendations.Contains(recommendationId);
         }
     }
 

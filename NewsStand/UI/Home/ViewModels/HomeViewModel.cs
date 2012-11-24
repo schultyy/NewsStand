@@ -84,6 +84,18 @@ namespace NewsStand.UI.Home.ViewModels
                     return;
                 hideReadItems = value;
                 NotifyOfPropertyChange(() => HideReadItems);
+                if (HideReadItems)
+                {
+                    var readItems = ServiceLocator.Current.GetInstance<IReadManager>()
+                        .GetReadRecommendations();
+                    foreach (var readItem in Recommendations.Where(c => readItems.Contains(c.Id)))
+                        readItem.IsRead = true;
+                }
+                else
+                {
+                    foreach (var recommendationViewModel in Recommendations)
+                        recommendationViewModel.IsRead = false;
+                }
             }
         }
 
