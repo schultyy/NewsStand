@@ -86,14 +86,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="Configuration\Serializer.cs" />
+    <Compile Include="Configuration\ConfigurationSerializer.cs" />
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Infrastructure\Converter.cs" />
     <Compile Include="Infrastructure\DataLoader.cs" />
     <Compile Include="Infrastructure\IDataLoader.cs" />
     <Compile Include="Infrastructure\MockLoader.cs" />
+    <Compile Include="Infrastructure\ReadLaterManager.cs" />
     <Compile Include="Infrastructure\ReadManager.cs" />
+    <Compile Include="Infrastructure\Serializer.cs" />
     <Compile Include="Model\Recommendation.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserWithFollowings.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="UI\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="UI\Home\ViewModels\HomeViewModel.cs" />
     <Compile Include="UI\Home\ViewModels\RecommendationViewModel.cs" />
+    <Compile Include="UI\ReadLater\ViewModels\ReadLaterListViewModel.cs" />
     <Compile Include="UI\Shell\ViewModels\ClosedEventArgs.cs" />
     <Compile Include="UI\Shell\ViewModels\UsernameViewModel.cs" />
     <Compile Include="UI\Shell\ViewModels\ShellViewModel.cs" />
@@ -137,6 +140,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="UI\Home\Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReadLater\Views\ReadLaterListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

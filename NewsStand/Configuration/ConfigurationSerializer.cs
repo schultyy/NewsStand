@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace NewsStand.Configuration
 {
-    public class Serializer
+    public class ConfigurationSerializer
     {
         private const string configFilename = "configuration.xml";
 

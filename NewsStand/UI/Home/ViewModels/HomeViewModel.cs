@@ -110,7 +110,7 @@ namespace NewsStand.UI.Home.ViewModels
         {
             base.OnActivate();
 
-            settings = Serializer.Load<Settings>();
+            settings = ConfigurationSerializer.Load<Settings>();
 
             Username = settings.Username;
 

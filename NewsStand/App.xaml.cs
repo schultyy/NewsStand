@@ -24,7 +24,7 @@ namespace NewsStand
 
             var boot = new AppBootstrapper();
 
-            Serializer.CheckFolder();
+            ConfigurationSerializer.CheckFolder();
 
             var windowManager = IoC.Get<IWindowManager>();
             windowManager.ShowDialog(new ShellViewModel());

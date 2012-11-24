@@ -21,11 +21,8 @@ namespace NewsStand.Infrastructure
 
         ~ReadManager()
         {
-            using (Stream stream = File.OpenWrite(Path.Combine(Serializer.GetRootDirectory(), readFilename)))
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(stream, readRecommendations);
-            }
+            Serializer.SaveBinary(Path.Combine(ConfigurationSerializer.GetRootDirectory(), readFilename),
+                                  readRecommendations);
         }
 
         public void MarkAsRead(int recommendationId)
@@ -43,15 +40,7 @@ namespace NewsStand.Infrastructure
 
         public List<int> GetReadRecommendations()
         {
-            if (File.Exists(Path.Combine(Serializer.GetRootDirectory(), readFilename)))
-            {
-                using (Stream stream = File.OpenRead(Path.Combine(Serializer.GetRootDirectory(), readFilename)))
-                {
-                    var formatter = new BinaryFormatter();
-                    return (List<int>)formatter.Deserialize(stream);
-                }
-            }
-            return null;
+            return readRecommendations;
         }
 
         public bool IsRead(int recommendationId)

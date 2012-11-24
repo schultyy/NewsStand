@@ -24,12 +24,12 @@ namespace NewsStand.UI.Shell.ViewModels
 
         public ShellViewModel()
         {
-            if (Serializer.Load<Settings>() == null)
+            if (ConfigurationSerializer.Load<Settings>() == null)
             {
                 var usernameModel = new UsernameViewModel();
                 usernameModel.Closed += (o, e) =>
                                             {
-                                                Serializer.Save(new Settings() { Username = e.Username });
+                                                ConfigurationSerializer.Save(new Settings() { Username = e.Username });
                                                 ActivateItem(new HomeViewModel());
                                             };
                 ActivateItem(usernameModel);
