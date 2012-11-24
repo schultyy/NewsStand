@@ -6,6 +6,7 @@ using NewsStand.Configuration;
 using NewsStand.Infrastructure;
 using NewsStand.Model;
 using NewsStand.Services;
+using NewsStand.UI.Shared.ViewModels;
 
 namespace NewsStand.UI.Home.ViewModels
 {

@@ -1,14 +1,12 @@
 using System;
-using System.Drawing;
 using System.Windows.Media.Imaging;
 using Caliburn.Micro;
 using Microsoft.Practices.ServiceLocation;
 using NewsStand.Infrastructure;
 using NewsStand.Model;
 using NewsStand.Services;
-using Xceed.Wpf.DataGrid.Converters;
 
-namespace NewsStand.UI.Home.ViewModels
+namespace NewsStand.UI.Shared.ViewModels
 {
     public class RecommendationViewModel : PropertyChangedBase
     {

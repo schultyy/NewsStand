@@ -10,6 +10,7 @@ using NewsStand.Configuration;
 using NewsStand.Infrastructure;
 using NewsStand.Model;
 using NewsStand.UI.Home.ViewModels;
+using NewsStand.UI.Shared.ViewModels;
 
 namespace NewsStand.UI.ReadLater.ViewModels
 {
