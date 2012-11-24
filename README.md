@@ -9,7 +9,7 @@ For performance reasons I only download the latest 5 recommendations / user. If 
 	⁃	Get your timeline
 	⁃	Mark recommendations for later reading (does not sync with website)
 # Requirements
-	## For usage
+## For usage
 	⁃	You need to install .Net 4 Client Profile. That should be all.
 ## For development
 	⁃	Git
