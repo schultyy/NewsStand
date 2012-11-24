@@ -5,5 +5,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <ContentControl cal:View.Model="{Binding ActiveItem}" />
+    <DockPanel LastChildFill="True">
+        <ListBox DockPanel.Dock="Left"
+                 SelectedItem="{Binding ActiveItem}"
+                 IsTabStop="False"
+                 BorderThickness="0"
+                 ItemsSource="{Binding Items}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border CornerRadius="2" 
+                            BorderBrush="Black" 
+                            BorderThickness="0.5"
+                            Height="32"
+                            Width="32">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#E8E8E8" Offset="0" />
+                                <GradientStop Color="Silver" Offset="0.25" />
+                                <GradientStop Color="#A9A7A7" Offset="0.5" />
+                                <GradientStop Color="#636363" Offset="0.75" />
+                                <GradientStop Color="#E8E8E8" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <TextBlock Foreground="White" FontSize="16" Text="{Binding DisplayName}"
+                                   FontFamily="Georgia"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"/>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ContentControl cal:View.Model="{Binding ActiveItem}" 
+                        DockPanel.Dock="Right"/>
+    </DockPanel>
 </UserControl>

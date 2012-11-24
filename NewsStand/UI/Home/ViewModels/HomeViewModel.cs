@@ -73,6 +73,18 @@ namespace NewsStand.UI.Home.ViewModels
             }
         }
 
+        public override string DisplayName
+        {
+            get
+            {
+                return "TL";
+            }
+            set
+            {
+                base.DisplayName = value;
+            }
+        }
+
         private bool hideReadItems;
 
         public bool HideReadItems

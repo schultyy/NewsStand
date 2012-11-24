@@ -5,6 +5,7 @@ using System.Text;
 using Caliburn.Micro;
 using NewsStand.Configuration;
 using NewsStand.UI.Home.ViewModels;
+using NewsStand.UI.ReadLater.ViewModels;
 
 namespace NewsStand.UI.Shell.ViewModels
 {
@@ -29,19 +30,19 @@ namespace NewsStand.UI.Shell.ViewModels
                 var usernameModel = new UsernameViewModel();
                 usernameModel.Closed += (o, e) =>
                                             {
-                                                ConfigurationSerializer.Save(new Settings() { Username = e.Username });
-                                                ActivateItem(new HomeViewModel());
+                                                ConfigurationSerializer.Save(new Settings() {Username = e.Username});
+                                                LoadViewModels();
                                             };
                 ActivateItem(usernameModel);
             }
             else
-                ActivateItem(new HomeViewModel());
+                LoadViewModels();
         }
 
-        public override void CanClose(Action<bool> callback)
+        private void LoadViewModels()
         {
-            base.CanClose(callback);
-            System.Diagnostics.Debug.WriteLine("Can close");
+            ActivateItem(new HomeViewModel());
+            ActivateItem(new ReadLaterListViewModel());
         }
     }
 }

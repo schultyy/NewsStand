@@ -25,7 +25,7 @@ namespace NewsStand.UI.ReadLater.ViewModels
         {
             get
             {
-                return "Recommendations saved for later reading";
+                return "RL";
             }
             set
             {
