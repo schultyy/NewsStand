@@ -36,6 +36,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border CornerRadius="2" BorderBrush="#F0F0F0" Background="White" BorderThickness="2"
+                                    Visibility="{Binding IsRead, Converter={StaticResource CollapsedIfTrue}}"
                              Margin="5">
                                 <DockPanel>
                                     <Image Source="{Binding Avatar}" DockPanel.Dock="Left" Width="64" Height="64"

@@ -103,6 +103,7 @@
     <Compile Include="Services\TimelineService.cs" />
     <Compile Include="UI\Behaviors\HyperlinkNavigationBehavior.cs" />
     <Compile Include="UI\Behaviors\LabelClickBehavior.cs" />
+    <Compile Include="UI\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="UI\Home\ViewModels\HomeViewModel.cs" />
     <Compile Include="UI\Home\ViewModels\RecommendationViewModel.cs" />
     <Compile Include="UI\Shell\ViewModels\ClosedEventArgs.cs" />

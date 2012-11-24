@@ -113,6 +113,9 @@ namespace NewsStand.UI.Home.ViewModels
 
             IsBusy = true;
 
+            var readItems = ServiceLocator.Current.GetInstance<IReadManager>()
+                                                    .GetReadRecommendations();
+
             Recommendations.Clear();
 
             var context = TaskScheduler.FromCurrentSynchronizationContext();
@@ -130,8 +133,7 @@ namespace NewsStand.UI.Home.ViewModels
                                                                                    foreach (var recommendation in timeLine)
                                                                                    {
                                                                                        var local = recommendation;
-
-                                                                                       AddModel(local);
+                                                                                       AddModel(local, readItems.Contains(local.Id));
                                                                                    }
                                                                                }, token, TaskCreationOptions.None,
                                                                            context).ContinueWith(_ => IsBusy = false, context);
@@ -146,7 +148,7 @@ namespace NewsStand.UI.Home.ViewModels
             }
         }
 
-        private void AddModel(Recommendation recommendation)
+        private void AddModel(Recommendation recommendation, bool isRead)
         {
             var user = User.Followings.Single(c => c.Id == recommendation.UserId);
             var avatar = avatarService.LoadAvatar(user.AvatarUrl);
@@ -160,7 +162,8 @@ namespace NewsStand.UI.Home.ViewModels
                                              WebsiteTitle = recommendation.WebsiteTitle,
                                              WebsiteUrl = recommendation.WebsiteUrl,
                                              Avatar = avatar,
-                                             Id = recommendation.Id
+                                             Id = recommendation.Id,
+                                             IsRead = isRead
                                          });
         }
     }
