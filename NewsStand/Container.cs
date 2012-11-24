@@ -20,6 +20,7 @@ namespace NewsStand
             container.RegisterInstance<IEventAggregator>(new EventAggregator());
             container.RegisterType<IDataLoader, DataLoader>();
             container.RegisterType<ITimelineService, TimelineService>();
+            container.RegisterInstance<IAvatarService>(new AvatarService());
 
             foreach (Type t in typeof(Screen).Assembly.GetTypes().Where(t => typeof(Screen).IsAssignableFrom(t)))
                 container.RegisterType(t);

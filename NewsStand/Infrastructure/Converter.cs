@@ -12,25 +12,14 @@ namespace NewsStand.Infrastructure
     {
         public static class FromJson
         {
-
-
-            public static User ToUser(JObject obj)
-            {
-                return new User
-                           {
-                               Id = Convert.ToInt32(obj["id"]),
-                               Username = obj["username"].ToString(),
-                               Fullname = obj["fullname"].ToString()
-                           };
-            }
-
             public static User ToUser(JToken obj)
             {
                 return new User
                            {
                                Id = obj["id"].ToObject<int>(),
                                Username = obj["username"].ToObject<string>(),
-                               Fullname = obj["fullname"].ToObject<string>()
+                               Fullname = obj["fullname"].ToObject<string>(),
+                               AvatarUrl = obj["avatar"].ToObject<string>()
                            };
             }
 
@@ -41,6 +30,7 @@ namespace NewsStand.Infrastructure
                                Id = json["user"]["id"].ToObject<int>(),
                                Username = json["user"]["username"].ToObject<string>(),
                                Fullname = json["user"]["fullname"].ToObject<string>(),
+                               AvatarUrl = json["user"]["avatar"].ToObject<string>(),
                                Followings = new ObservableCollection<User>(json["entities"].Select(ToUser))
                            };
             }

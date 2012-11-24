@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Caliburn.Micro;
 using Microsoft.Practices.ServiceLocation;
@@ -21,6 +23,8 @@ namespace NewsStand.UI.Home.ViewModels
         private Settings settings;
 
         private readonly IDataLoader loader;
+
+        private readonly IAvatarService avatarService;
 
         private string username;
 
@@ -81,6 +85,7 @@ namespace NewsStand.UI.Home.ViewModels
         public HomeViewModel()
         {
             this.loader = ServiceLocator.Current.GetInstance<IDataLoader>();
+            this.avatarService = ServiceLocator.Current.GetInstance<IAvatarService>();
             Recommendations = new BindableCollection<RecommendationViewModel>();
         }
 
@@ -94,51 +99,69 @@ namespace NewsStand.UI.Home.ViewModels
 
             User = loader.LoadFollowings(settings.Username);
 
-            var backgroundWorker = new BackgroundWorker();
-
             IsBusy = true;
 
-            backgroundWorker.DoWork += (o, e) =>
-                                           {
-                                               var timeLine = ServiceLocator.Current.GetInstance<ITimelineService>()
-                                                   .GetTimeLineForToday(User.Username);
+            var context = TaskScheduler.FromCurrentSynchronizationContext();
 
-                                               foreach (var recommendation in timeLine.Where(c => c.Created.Date == DateTime.Today))
-                                               {
-                                                   var local = recommendation;
-                                                   Dispatcher.CurrentDispatcher.Invoke(
-                                                       new System.Action(() => AddModel(local)),
-                                                       DispatcherPriority.DataBind);
-                                               }
-                                               IsBusy = false;
+            var task = Task.Factory.StartNew(() =>
+                                                  {
+                                                      var timeLine = ServiceLocator.Current.GetInstance
+                                                          <ITimelineService>()
+                                                          .GetTimeLineForToday(User.Username);
 
-                                               foreach (var recommendation in timeLine.Where(c => c.Created.Date != DateTime.Today))
-                                               {
-                                                   var local = recommendation;
-                                                   Dispatcher.CurrentDispatcher.Invoke(
-                                                       new System.Action(() => AddModel(local)),
-                                                       DispatcherPriority.DataBind);
-                                               }
-                                           };
-            backgroundWorker.RunWorkerCompleted += (o, e) =>
-                                                       {
-                                                           IsBusy = false;
-                                                       };
-            backgroundWorker.RunWorkerAsync();
+                                                      var token = Task.Factory.CancellationToken;
+
+                                                      Task.Factory.StartNew(() =>
+                                                                                {
+                                                                                    foreach (
+                                                                                        var recommendation in
+                                                                                            timeLine.Where(
+                                                                                                c =>
+                                                                                                c.Created.Date ==
+                                                                                                DateTime.Today))
+                                                                                    {
+                                                                                        var local = recommendation;
+
+                                                                                        AddModel(local);
+                                                                                    }
+                                                                                }, token, TaskCreationOptions.None,
+                                                                            context).ContinueWith(_ => IsBusy = false, context);
+
+
+
+                                                      Task.Factory.StartNew(() =>
+                                                                                {
+                                                                                    foreach (
+                                                                                        var recommendation in
+                                                                                            timeLine.Where(
+                                                                                                c =>
+                                                                                                c.Created.Date !=
+                                                                                                DateTime.Today))
+                                                                                    {
+                                                                                        var local = recommendation;
+
+                                                                                        AddModel(local);
+                                                                                    }
+                                                                                }, token, TaskCreationOptions.None,
+                                                                            context);
+                                                  });
 
         }
 
         private void AddModel(Recommendation recommendation)
         {
+            var user = User.Followings.Single(c => c.Id == recommendation.UserId);
+            var avatar = avatarService.LoadAvatar(user.AvatarUrl);
             recommendations.Add(new RecommendationViewModel
                                          {
                                              Created = recommendation.Created,
                                              Quote = recommendation.Quote,
                                              Url = recommendation.Url,
-                                             User = User.Followings.Single(c => c.Id == recommendation.UserId),
+                                             User = user,
                                              ArticleTitle = recommendation.ArticleTitle,
                                              WebsiteTitle = recommendation.WebsiteTitle,
-                                             WebsiteUrl = recommendation.WebsiteUrl
+                                             WebsiteUrl = recommendation.WebsiteUrl,
+                                             Avatar = avatar
                                          });
         }
     }

@@ -54,6 +54,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity">
       <HintPath>..\packages\Caliburn.Micro.1.4\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -95,6 +96,8 @@
     <Compile Include="Model\Recommendation.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserWithFollowings.cs" />
+    <Compile Include="Services\AvatarService.cs" />
+    <Compile Include="Services\IAvatarService.cs" />
     <Compile Include="Services\ITimelineService.cs" />
     <Compile Include="Services\TimelineService.cs" />
     <Compile Include="UI\Behaviors\HyperlinkNavigationBehavior.cs" />

@@ -1,4 +1,6 @@
 using System;
+using System.Drawing;
+using System.Windows.Media.Imaging;
 using Caliburn.Micro;
 using NewsStand.Model;
 
@@ -101,6 +103,20 @@ namespace NewsStand.UI.Home.ViewModels
                     return;
                 websiteUrl = value;
                 NotifyOfPropertyChange(() => WebsiteUrl);
+            }
+        }
+
+        private BitmapImage avatar;
+
+        public BitmapImage Avatar
+        {
+            get { return avatar; }
+            set
+            {
+                if (avatar == value)
+                    return;
+                avatar = value;
+                NotifyOfPropertyChange(() => Avatar);
             }
         }
     }
