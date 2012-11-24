@@ -54,6 +54,10 @@ namespace NewsStand.Infrastructure
 
             public static Recommendation ToRecommendation(JToken json)
             {
+                var uri = new Uri(json["article"]["url"].ToObject<string>());
+
+                var websiteName = uri.GetLeftPart(UriPartial.Authority);
+
                 return new Recommendation
                            {
                                Id = json["id"].ToObject<int>(),
@@ -61,7 +65,10 @@ namespace NewsStand.Infrastructure
                                Quote = json["quote"].ToObject<string>(),
                                PlatformUrl = json["platform_url"].ToObject<string>(),
                                UserId = json["user_id"].ToObject<int>(),
-                               Url = json["article"]["url"].ToObject<string>()
+                               Url = json["article"]["url"].ToObject<string>(),
+                               ArticleTitle = json["article"]["title"].ToObject<string>(),
+                               WebsiteTitle = websiteName,
+                               WebsiteUrl = uri.Host
                            };
             }
         }
