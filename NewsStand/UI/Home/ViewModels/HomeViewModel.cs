@@ -18,6 +18,8 @@ namespace NewsStand.UI.Home.ViewModels
 
         private readonly IAvatarService avatarService;
 
+        private readonly IReadLaterManager readLaterManager;
+
         private string username;
 
         public string Username
@@ -116,6 +118,7 @@ namespace NewsStand.UI.Home.ViewModels
         {
             this.loader = ServiceLocator.Current.GetInstance<IDataLoader>();
             this.avatarService = ServiceLocator.Current.GetInstance<IAvatarService>();
+            this.readLaterManager = ServiceLocator.Current.GetInstance<IReadLaterManager>();
             Recommendations = new BindableCollection<RecommendationViewModel>();
         }
 
@@ -150,17 +153,12 @@ namespace NewsStand.UI.Home.ViewModels
                                                          .GetTimeLineForToday(User.Username);
 
                                                      var token = Task.Factory.CancellationToken;
-
-                                                     Task.Factory.StartNew(() =>
-                                                                               {
-                                                                                   foreach (var recommendation in timeLine)
-                                                                                   {
-                                                                                       var local = recommendation;
-                                                                                       AddModel(local, readItems.Contains(local.Id));
-                                                                                   }
-                                                                               }, token, TaskCreationOptions.None,
-                                                                           context).ContinueWith(_ => IsBusy = false, context);
-                                                 });
+                                                     foreach (var recommendation in timeLine)
+                                                     {
+                                                         var local = recommendation;
+                                                         Task.Factory.StartNew(() => AddModel(local, readItems.Contains(local.Id)), token, TaskCreationOptions.None, context);
+                                                     }
+                                                 }).ContinueWith(_ => IsBusy = false, context);
         }
 
         private void AddModel(Recommendation recommendation, bool isRead)
