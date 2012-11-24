@@ -2,20 +2,8 @@
 
 namespace NewsStand.UI.Shell.ViewModels
 {
-    public class UsernameViewModel : Screen
+    public sealed class UsernameViewModel : Screen
     {
-        public override string DisplayName
-        {
-            get
-            {
-                return "Quote.fm username";
-            }
-            set
-            {
-                base.DisplayName = value;
-            }
-        }
-
         private string username;
 
         public string Username
@@ -33,6 +21,11 @@ namespace NewsStand.UI.Shell.ViewModels
         public delegate void ClosedHandler(object sender, ClosedEventArgs args);
 
         public event ClosedHandler Closed;
+
+        public UsernameViewModel()
+        {
+            DisplayName = string.Empty;
+        }
 
         public void Ok()
         {

@@ -11,26 +11,16 @@ namespace NewsStand.UI.Shell.ViewModels
 {
     public sealed class ShellViewModel : Conductor<Screen>.Collection.OneActive
     {
-        public override string DisplayName
-        {
-            get
-            {
-                return "Newsstand";
-            }
-            set
-            {
-                base.DisplayName = value;
-            }
-        }
-
         public ShellViewModel()
         {
             if (ConfigurationSerializer.Load<Settings>() == null)
             {
+                DisplayName = "NewsStand";
                 var usernameModel = new UsernameViewModel();
                 usernameModel.Closed += (o, e) =>
                                             {
-                                                ConfigurationSerializer.Save(new Settings() {Username = e.Username});
+                                                ConfigurationSerializer.Save(new Settings() { Username = e.Username });
+                                                usernameModel.TryClose();
                                                 LoadViewModels();
                                             };
                 ActivateItem(usernameModel);
@@ -41,8 +31,9 @@ namespace NewsStand.UI.Shell.ViewModels
 
         private void LoadViewModels()
         {
-            ActivateItem(new HomeViewModel());
             ActivateItem(new ReadLaterListViewModel());
+            ActivateItem(new HomeViewModel());
+            DisplayName = string.Format("NewsStand - {0}", ConfigurationSerializer.Load<Settings>().Username);
         }
     }
 }
