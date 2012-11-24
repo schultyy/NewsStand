@@ -103,5 +103,14 @@ namespace NewsStand.UI.ReadLater.ViewModels
                                           }
                                       }).ContinueWith(_ => IsBusy = false, context);
         }
+
+        public void MarkAsRead(RecommendationViewModel context)
+        {
+            if (context == null)
+                return;
+
+            readLaterManager.DeleteReadLaterEntry(context.Id);
+            Recommendations.Remove(context);
+        }
     }
 }
