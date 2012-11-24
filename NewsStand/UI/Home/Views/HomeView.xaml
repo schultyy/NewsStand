@@ -10,13 +10,6 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <toolkit:BusyIndicator IsBusy="{Binding IsBusy}" BusyContent="Be so kind and wait while newsstand is processing your timeline...">
         <DockPanel LastChildFill="True">
-            <TextBlock FontFamily="Arial" FontSize="16" HorizontalAlignment="Left"
-                   Margin="5"
-                   DockPanel.Dock="Top">
-                <TextBlock.Text>
-                    <Binding StringFormat="Welcome back, {0}" Path="Username" />
-                </TextBlock.Text>
-            </TextBlock>
             <ScrollViewer DockPanel.Dock="Bottom">
                 <ItemsControl ItemsSource="{Binding Recommendations}"
                           
@@ -31,7 +24,8 @@
                             <Border CornerRadius="2" BorderBrush="#F0F0F0" Background="White" BorderThickness="2"
                              Margin="5">
                                 <DockPanel>
-                                    <Image Source="{Binding Avatar}" DockPanel.Dock="Left" Width="64" Height="64" />
+                                    <Image Source="{Binding Avatar}" DockPanel.Dock="Left" Width="64" Height="64"
+                                           Margin="5" />
                                     <StackPanel Margin="5" DockPanel.Dock="Top"
                                         Orientation="Horizontal">
                                         <TextBlock Text="{Binding User.Fullname}" Margin="0 5 0 0" />
@@ -61,20 +55,9 @@
                                         <Binding Path="Quote" StringFormat="{}&quot;{0}&quot;" />
                                     </TextBlock.Text>
                                     </TextBlock>
-                                    <StackPanel Orientation="Horizontal"
-                                        DockPanel.Dock="Bottom">
-                                        <Label Foreground="Blue" Margin="5" FontStyle="Italic">
-                                            <Label.Content>
-                                                <Run Text="{Binding Url}" />
-                                            </Label.Content>
-                                            <i:Interaction.Behaviors>
-                                                <behaviors:LabelClickBehavior />
-                                            </i:Interaction.Behaviors>
-                                        </Label>
-                                    </StackPanel>
                                     <TextBlock Text="{Binding Created, ConverterCulture=de-DE}" Margin="5 0 0 0" 
                                                DockPanel.Dock="Bottom"
-                                               FontFamily="8"/>
+                                               FontSize="8" />
                                 </DockPanel>
                             </Border>
                         </DataTemplate>
