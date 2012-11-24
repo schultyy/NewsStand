@@ -97,10 +97,9 @@ namespace NewsStand.UI.ReadLater.ViewModels
                                                       current,
                                                       users.Followings.Single(
                                                           c => c.Id == current.UserId))), token,
-                                                                    TaskCreationOptions.None, context)
-                                                  .ContinueWith(_ => IsBusy = false, context);
+                                                                    TaskCreationOptions.None, context);
                                           }
-                                      });
+                                      }).ContinueWith(_ => IsBusy = false, context);
         }
     }
 }

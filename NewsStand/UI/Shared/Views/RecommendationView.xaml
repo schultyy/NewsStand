@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:behaviors="clr-namespace:NewsStand.UI.Behaviors" mc:Ignorable="d" 
+             xmlns:behaviors="clr-namespace:NewsStand.UI.Behaviors" xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Border CornerRadius="2" BorderBrush="#F0F0F0" Background="White" BorderThickness="2"
                                     Visibility="{Binding IsRead, Converter={StaticResource CollapsedIfTrue}}"
@@ -49,6 +50,7 @@
                           IsChecked="{Binding IsRead}"/>-->
                 <Button Content="Mark for later reading"
                         HorizontalAlignment="Left"
+                        cal:Message.Attach="MarkForLaterReading($datacontext)"
                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                         Margin="5" />
             </Expander>

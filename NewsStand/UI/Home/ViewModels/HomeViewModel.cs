@@ -168,5 +168,12 @@ namespace NewsStand.UI.Home.ViewModels
             var currentUser = User.Followings.Single(c => c.Id == recommendation.UserId);
             Recommendations.Add(RecommendationViewModel.FromModel(recommendation, currentUser, isRead));
         }
+
+        public void MarkForLaterReading(RecommendationViewModel context)
+        {
+            if (context == null)
+                return;
+            ServiceLocator.Current.GetInstance<IReadLaterManager>().MarkForLaterReading(context.Id);
+        }
     }
 }
