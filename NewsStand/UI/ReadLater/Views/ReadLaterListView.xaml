@@ -8,20 +8,31 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <toolkit:BusyIndicator IsBusy="{Binding IsBusy}">
-        <ScrollViewer>
-            <ItemsControl ItemsSource="{Binding Recommendations}"
+        <DockPanel LastChildFill="True">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        DockPanel.Dock="Top">
+                <Button Content="Reload"
+                        HorizontalAlignment="Left"
+                        cal:Message.Attach="LoadRecommendations"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                        Margin="5" />
+            </StackPanel>
+            <ScrollViewer DockPanel.Dock="Bottom">
+                <ItemsControl ItemsSource="{Binding Recommendations}"
                           ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ContentControl cal:View.Model="{Binding}" cal:View.Context="ReadLater" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl cal:View.Model="{Binding}" cal:View.Context="ReadLater" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
     </toolkit:BusyIndicator>
 </UserControl>
