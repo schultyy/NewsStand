@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Caliburn.Micro;
 using Microsoft.Practices.ServiceLocation;
 using NewsStand.Configuration;
@@ -138,14 +136,6 @@ namespace NewsStand.UI.Home.ViewModels
                                                                                }, token, TaskCreationOptions.None,
                                                                            context).ContinueWith(_ => IsBusy = false, context);
                                                  });
-        }
-
-        public void OnKeyDown(KeyEventArgs args)
-        {
-            if (args.Key == Key.F5)
-            {
-                LoadRecommendations();
-            }
         }
 
         private void AddModel(Recommendation recommendation, bool isRead)
