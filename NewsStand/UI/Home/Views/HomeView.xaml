@@ -22,6 +22,7 @@
                         cal:Message.Attach="LoadRecommendations"
                         Width="100"
                         Margin="5"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                         HorizontalAlignment="Right" />
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom">
