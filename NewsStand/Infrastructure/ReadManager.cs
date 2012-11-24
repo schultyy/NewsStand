@@ -12,9 +12,11 @@ namespace NewsStand.Infrastructure
     {
         private const string readFilename = "ReadRecommendations.bin";
 
-        public void SetAsRead(int recommendationId)
+        public void MarkAsRead(int recommendationId)
         {
-            var items = GetReadRecommendations();
+            var items = GetReadRecommendations() ?? new List<int>();
+            if (items.Contains(recommendationId))
+                return;
             items.Add(recommendationId);
             using (Stream stream = File.OpenWrite(Path.Combine(Serializer.GetRootDirectory(), readFilename)))
             {
@@ -23,19 +25,38 @@ namespace NewsStand.Infrastructure
             }
         }
 
+        public void MarkAsUnread(int recommendationId)
+        {
+            var items = GetReadRecommendations() ?? new List<int>();
+            if (items.Contains(recommendationId))
+            {
+                items.Remove(recommendationId);
+                using (Stream stream = File.OpenWrite(Path.Combine(Serializer.GetRootDirectory(), readFilename)))
+                {
+                    var formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, items);
+                }
+            }
+        }
+
         public List<int> GetReadRecommendations()
         {
-            using (Stream stream = File.OpenRead(Path.Combine(Serializer.GetRootDirectory(), readFilename)))
+            if (File.Exists(Path.Combine(Serializer.GetRootDirectory(), readFilename)))
             {
-                var formatter = new BinaryFormatter();
-                return (List<int>)formatter.Deserialize(stream);
+                using (Stream stream = File.OpenRead(Path.Combine(Serializer.GetRootDirectory(), readFilename)))
+                {
+                    var formatter = new BinaryFormatter();
+                    return (List<int>)formatter.Deserialize(stream);
+                }
             }
+            return null;
         }
     }
 
     public interface IReadManager
     {
-        void SetAsRead(int recommendationId);
+        void MarkAsRead(int recommendationId);
         List<int> GetReadRecommendations();
+        void MarkAsUnread(int recommendationId);
     }
 }

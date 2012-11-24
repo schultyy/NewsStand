@@ -2,7 +2,10 @@ using System;
 using System.Drawing;
 using System.Windows.Media.Imaging;
 using Caliburn.Micro;
+using Microsoft.Practices.ServiceLocation;
+using NewsStand.Infrastructure;
 using NewsStand.Model;
+using Xceed.Wpf.DataGrid.Converters;
 
 namespace NewsStand.UI.Home.ViewModels
 {
@@ -117,6 +120,42 @@ namespace NewsStand.UI.Home.ViewModels
                     return;
                 avatar = value;
                 NotifyOfPropertyChange(() => Avatar);
+            }
+        }
+
+        private int id;
+
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                if (id == value)
+                    return;
+                id = value;
+                NotifyOfPropertyChange(() => Id);
+            }
+        }
+
+        private bool isRead;
+
+        public bool IsRead
+        {
+            get { return isRead; }
+            set
+            {
+                if (isRead == value)
+                    return;
+                isRead = value;
+                NotifyOfPropertyChange(() => IsRead);
+
+                var readManager = ServiceLocator.Current.GetInstance<IReadManager>();
+                if (IsRead)
+                    readManager.MarkAsRead(Id);
+                else
+                {
+                    readManager.MarkAsUnread(Id);
+                }
             }
         }
     }

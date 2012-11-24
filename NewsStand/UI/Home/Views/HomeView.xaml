@@ -72,7 +72,8 @@
                                     <TextBlock Text="{Binding Created, ConverterCulture=de-DE}" Margin="5 0 0 0" 
                                                DockPanel.Dock="Bottom"
                                                FontSize="8" />
-                                    <CheckBox DockPanel.Dock="Right" Margin="5" Content="Mark as read" />
+                                    <CheckBox DockPanel.Dock="Right" Margin="5" Content="Mark as read"
+                                              IsChecked="{Binding IsRead}"/>
                                 </DockPanel>
                             </Border>
                         </DataTemplate>

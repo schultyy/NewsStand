@@ -159,7 +159,8 @@ namespace NewsStand.UI.Home.ViewModels
                                              ArticleTitle = recommendation.ArticleTitle,
                                              WebsiteTitle = recommendation.WebsiteTitle,
                                              WebsiteUrl = recommendation.WebsiteUrl,
-                                             Avatar = avatar
+                                             Avatar = avatar,
+                                             Id = recommendation.Id
                                          });
         }
     }
