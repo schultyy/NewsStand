@@ -36,7 +36,6 @@ namespace NewsStand.Infrastructure
 
             public static UserWithFollowings ToUserWithFollowings(JObject json)
             {
-                var id = json["user"]["id"].ToObject<int>();
                 return new UserWithFollowings
                            {
                                Id = json["user"]["id"].ToObject<int>(),
