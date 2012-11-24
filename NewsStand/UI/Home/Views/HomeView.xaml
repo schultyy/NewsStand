@@ -34,48 +34,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border CornerRadius="2" BorderBrush="#F0F0F0" Background="White" BorderThickness="2"
-                                    Visibility="{Binding IsRead, Converter={StaticResource CollapsedIfTrue}}"
-                             Margin="5">
-                                <DockPanel>
-                                    <Image Source="{Binding Avatar}" DockPanel.Dock="Left" Width="64" Height="64"
-                                           Margin="5" />
-                                    <StackPanel Margin="5" DockPanel.Dock="Top"
-                                        Orientation="Horizontal">
-                                        <TextBlock Text="{Binding User.Fullname}" Margin="0 5 0 0" />
-                                        <TextBlock Text=" recommended " Margin="0 5 0 0" />
-                                        <Label Margin="0">
-                                            <Hyperlink NavigateUri="{Binding Url}">
-                                                <i:Interaction.Behaviors>
-                                                    <behaviors:HyperlinkNavigationBehavior />
-                                                </i:Interaction.Behaviors>
-                                                <TextBlock Text="{Binding ArticleTitle}" />
-                                            </Hyperlink>
-                                        </Label>
-                                        <TextBlock Text=" from " Margin="0 5 0 0" />
-                                        <Label Margin="0">
-                                            <Hyperlink NavigateUri="{Binding WebsiteUrl}">
-                                                <i:Interaction.Behaviors>
-                                                    <behaviors:HyperlinkNavigationBehavior />
-                                                </i:Interaction.Behaviors>
-                                                <TextBlock Text="{Binding WebsiteTitle}" />
-                                            </Hyperlink>
-                                        </Label>
-                                    </StackPanel>
-                                    <TextBlock FontSize="16" FontFamily="Times New Roman"
-                                           DockPanel.Dock="Top" Margin="10"
-                                   TextAlignment="Left" TextWrapping="Wrap">
-                                    <TextBlock.Text>
-                                        <Binding Path="Quote" StringFormat="{}&quot;{0}&quot;" />
-                                    </TextBlock.Text>
-                                    </TextBlock>
-                                    <TextBlock Text="{Binding Created, ConverterCulture=de-DE}" Margin="5 0 0 0" 
-                                               DockPanel.Dock="Bottom"
-                                               FontSize="8" />
-                                    <CheckBox DockPanel.Dock="Right" Margin="5" Content="Done with reading"
-                                              IsChecked="{Binding IsRead}"/>
-                                </DockPanel>
-                            </Border>
+                            <ContentControl cal:View.Model="{Binding}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
