@@ -127,12 +127,7 @@ namespace NewsStand.UI.Home.ViewModels
 
                                                      Task.Factory.StartNew(() =>
                                                                                {
-                                                                                   foreach (
-                                                                                       var recommendation in
-                                                                                           timeLine.Where(
-                                                                                               c =>
-                                                                                               c.Created.Date ==
-                                                                                               DateTime.Today))
+                                                                                   foreach (var recommendation in timeLine)
                                                                                    {
                                                                                        var local = recommendation;
 
@@ -140,29 +135,12 @@ namespace NewsStand.UI.Home.ViewModels
                                                                                    }
                                                                                }, token, TaskCreationOptions.None,
                                                                            context).ContinueWith(_ => IsBusy = false, context);
-
-
-                                                     Task.Factory.StartNew(() =>
-                                                                               {
-                                                                                   foreach (
-                                                                                       var recommendation in
-                                                                                           timeLine.Where(
-                                                                                               c =>
-                                                                                               c.Created.Date !=
-                                                                                               DateTime.Today))
-                                                                                   {
-                                                                                       var local = recommendation;
-
-                                                                                       AddModel(local);
-                                                                                   }
-                                                                               }, token, TaskCreationOptions.None,
-                                                                           context);
                                                  });
         }
 
         public void OnKeyDown(KeyEventArgs args)
         {
-            if(args.Key == Key.F5)
+            if (args.Key == Key.F5)
             {
                 LoadRecommendations();
             }

@@ -27,7 +27,6 @@
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom">
                 <ItemsControl ItemsSource="{Binding Recommendations}"
-                          
                       ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
