@@ -48,11 +48,4 @@ namespace NewsStand.Infrastructure
             return readRecommendations.Contains(recommendationId);
         }
     }
-
-    public interface IReadManager
-    {
-        void MarkAsRead(int recommendationId);
-        List<int> GetReadRecommendations();
-        void MarkAsUnread(int recommendationId);
-    }
 }

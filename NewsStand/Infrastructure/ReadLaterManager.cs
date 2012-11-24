@@ -7,13 +7,6 @@ using NewsStand.Configuration;
 
 namespace NewsStand.Infrastructure
 {
-    public interface IReadLaterManager
-    {
-        void MarkForLaterReading(int recommendationId);
-        List<int> GetReadLaterRecommendations();
-        void DeleteReadLaterEntry(int recommendationId);
-    }
-
     public class ReadLaterManager : IReadLaterManager
     {
         private readonly List<int> readLater;
