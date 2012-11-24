@@ -108,7 +108,6 @@
     <Compile Include="UI\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="UI\Home\ViewModels\HomeViewModel.cs" />
     <Compile Include="UI\ReadLater\ViewModels\ReadLaterListViewModel.cs" />
-    <Compile Include="UI\ReadLater\ViewModels\ReadLaterViewModel.cs" />
     <Compile Include="UI\Shared\ViewModels\RecommendationViewModel.cs" />
     <Compile Include="UI\Shell\ViewModels\ClosedEventArgs.cs" />
     <Compile Include="UI\Shell\ViewModels\UsernameViewModel.cs" />
@@ -148,11 +147,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\ReadLater\Views\ReadLaterView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="UI\Shared\Views\Recommendation.ReadLater.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Shared\Views\RecommendationView.xaml">
+    <Page Include="UI\Shared\Views\Recommendation.Default.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
