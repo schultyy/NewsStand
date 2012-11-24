@@ -7,7 +7,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
         <TextBlock Text="Please enter your quote.fm username: "/>
-        <TextBox Text="{Binding Username}" />
-        <Button HorizontalAlignment="Right" Content="Ok" cal:Message.Attach="Ok" />
+        <TextBox Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}" />
+        <Button HorizontalAlignment="Right" Content="Ok" cal:Message.Attach="Confirm"
+                Margin="5" Width="75" />
     </StackPanel>
 </UserControl>

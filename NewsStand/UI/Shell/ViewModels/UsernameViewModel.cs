@@ -15,7 +15,13 @@ namespace NewsStand.UI.Shell.ViewModels
                     return;
                 username = value;
                 NotifyOfPropertyChange(() => Username);
+                NotifyOfPropertyChange(() => CanConfirm);
             }
+        }
+
+        public bool CanConfirm
+        {
+            get { return !string.IsNullOrEmpty(Username); }
         }
 
         public delegate void ClosedHandler(object sender, ClosedEventArgs args);
@@ -27,7 +33,7 @@ namespace NewsStand.UI.Shell.ViewModels
             DisplayName = string.Empty;
         }
 
-        public void Ok()
+        public void Confirm()
         {
             Closed(this, new ClosedEventArgs { Username = Username });
         }
