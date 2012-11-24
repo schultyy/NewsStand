@@ -82,6 +82,20 @@ namespace NewsStand.UI.Home.ViewModels
             }
         }
 
+        private bool hideReadItems;
+
+        public bool HideReadItems
+        {
+            get { return hideReadItems; }
+            set
+            {
+                if (hideReadItems == value)
+                    return;
+                hideReadItems = value;
+                NotifyOfPropertyChange(() => HideReadItems);
+            }
+        }
+
         public HomeViewModel()
         {
             this.loader = ServiceLocator.Current.GetInstance<IDataLoader>();

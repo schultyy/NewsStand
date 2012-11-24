@@ -6,10 +6,19 @@
              xmlns:behaviors="clr-namespace:NewsStand.UI.Behaviors"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <toolkit:BusyIndicator IsBusy="{Binding IsBusy}" BusyContent="Be so kind and wait while newsstand is processing your timeline...">
         <DockPanel LastChildFill="True">
+            <Expander Header="Options" DockPanel.Dock="Top">
+                <StackPanel>
+                    <CheckBox Content="Hide read recommendations" IsChecked="{Binding HideReadItems}" />
+                </StackPanel>
+            </Expander>
+            <StackPanel DockPanel.Dock="Top">
+                <Button Content="Reload" cal:Message.Attach="Reload" />
+            </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom">
                 <ItemsControl ItemsSource="{Binding Recommendations}"
                           

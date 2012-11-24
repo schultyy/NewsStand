@@ -93,6 +93,7 @@
     <Compile Include="Infrastructure\DataLoader.cs" />
     <Compile Include="Infrastructure\IDataLoader.cs" />
     <Compile Include="Infrastructure\MockLoader.cs" />
+    <Compile Include="Infrastructure\ReadManager.cs" />
     <Compile Include="Model\Recommendation.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserWithFollowings.cs" />

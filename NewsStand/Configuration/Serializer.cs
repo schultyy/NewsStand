@@ -11,7 +11,7 @@ namespace NewsStand.Configuration
     {
         private const string configFilename = "configuration.xml";
 
-        private static string GetRootDirectory()
+        public static string GetRootDirectory()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Newsstand");
         }
