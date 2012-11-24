@@ -14,3 +14,7 @@ For performance reasons I only download the latest 5 recommendations / user. If 
 ## For development
 	⁃	Git
 	⁃	Visual Studio 2010
+# TO DO
+	⁃	Make this app look a bit nicer
+	⁃	Add errorhandling (show nice error messages when user is unknown, service not available, etc.)
+	⁃	Use write API 
