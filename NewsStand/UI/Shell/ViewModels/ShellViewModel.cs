@@ -31,8 +31,9 @@ namespace NewsStand.UI.Shell.ViewModels
 
         private void LoadViewModels()
         {
-            ActivateItem(new ReadLaterListViewModel());
-            ActivateItem(new HomeViewModel());
+            Items.Add(new HomeViewModel());
+            Items.Add(new ReadLaterListViewModel());
+            ActivateItem(Items.First());
             DisplayName = string.Format("NewsStand - {0}", ConfigurationSerializer.Load<Settings>().Username);
         }
     }
