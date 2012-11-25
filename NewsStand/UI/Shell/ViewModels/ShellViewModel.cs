@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Caliburn.Micro;
 using NewsStand.Configuration;
+using NewsStand.UI.Configuration.ViewModels;
 using NewsStand.UI.Home.ViewModels;
 using NewsStand.UI.ReadLater.ViewModels;
 
@@ -33,6 +34,7 @@ namespace NewsStand.UI.Shell.ViewModels
         {
             Items.Add(new HomeViewModel());
             Items.Add(new ReadLaterListViewModel());
+            Items.Add(new ConfigurationViewModel());
             ActivateItem(Items.First());
             DisplayName = string.Format("NewsStand - {0}", ConfigurationSerializer.Load<Settings>().Username);
         }

@@ -107,6 +107,7 @@
     <Compile Include="Services\TimelineService.cs" />
     <Compile Include="UI\Behaviors\HyperlinkNavigationBehavior.cs" />
     <Compile Include="UI\Behaviors\LabelClickBehavior.cs" />
+    <Compile Include="UI\Configuration\ViewModels\ConfigurationViewModel.cs" />
     <Compile Include="UI\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="UI\Home\ViewModels\HomeViewModel.cs" />
     <Compile Include="UI\ReadLater\ViewModels\ReadLaterListViewModel.cs" />
@@ -141,6 +142,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="UI\Configuration\Views\ConfigurationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Home\Views\HomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
