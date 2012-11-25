@@ -16,25 +16,23 @@ namespace NewsStand.Configuration
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Newsstand");
         }
 
-        public static void Save<T>(T instance)
-            where T : class
+        public static void Save(Settings instance)
         {
             using (var streamWriter = new StreamWriter(Path.Combine(GetRootDirectory(), configFilename)))
             {
-                var serializer = new XmlSerializer(typeof(T));
+                var serializer = new XmlSerializer(typeof(Settings));
                 serializer.Serialize(streamWriter, instance);
             }
         }
 
-        public static T Load<T>()
-            where T : class
+        public static Settings Load()
         {
             if (File.Exists(Path.Combine(GetRootDirectory(), configFilename)))
             {
                 using (var streamReader = new StreamReader(Path.Combine(GetRootDirectory(), configFilename)))
                 {
-                    var serializer = new XmlSerializer(typeof(T));
-                    return serializer.Deserialize(streamReader) as T;
+                    var serializer = new XmlSerializer(typeof(Settings));
+                    return serializer.Deserialize(streamReader) as Settings;
                 }
             }
             return null;

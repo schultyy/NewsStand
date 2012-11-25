@@ -43,13 +43,13 @@ namespace NewsStand.UI.Configuration.ViewModels
         {
             DisplayName = "CFG";
             InstalledFonts = new ObservableCollection<FontFamily>(Fonts.SystemFontFamilies.OrderBy(c => c.Source));
-            var settings = ConfigurationSerializer.Load<Settings>();
+            var settings = ConfigurationSerializer.Load();
             SelectedFont = string.IsNullOrEmpty(settings.Font) ? InstalledFonts.First() : InstalledFonts.Single(c => c.Source == settings.Font);
         }
 
         public void SaveSettings()
         {
-            var settings = ConfigurationSerializer.Load<Settings>();
+            var settings = ConfigurationSerializer.Load();
             settings.Font = SelectedFont.Source;
             ConfigurationSerializer.Save(settings);
         }

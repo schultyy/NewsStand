@@ -126,7 +126,7 @@ namespace NewsStand.UI.Home.ViewModels
         {
             base.OnActivate();
 
-            settings = ConfigurationSerializer.Load<Settings>();
+            settings = ConfigurationSerializer.Load();
 
             Username = settings.Username;
 
@@ -164,7 +164,7 @@ namespace NewsStand.UI.Home.ViewModels
         private void AddModel(Recommendation recommendation, bool isRead)
         {
             var currentUser = User.Followings.Single(c => c.Id == recommendation.UserId);
-            Recommendations.Add(RecommendationViewModel.FromModel(recommendation, currentUser, isRead));
+            Recommendations.Add(RecommendationViewModel.FromModel(recommendation, currentUser, settings.Font, isRead));
         }
 
         public void MarkForLaterReading(RecommendationViewModel context)

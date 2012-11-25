@@ -66,7 +66,7 @@ namespace NewsStand.UI.ReadLater.ViewModels
         {
             readLaterManager = ServiceLocator.Current.GetInstance<IReadLaterManager>();
             dataLoader = ServiceLocator.Current.GetInstance<IDataLoader>();
-            settings = ConfigurationSerializer.Load<Settings>();
+            settings = ConfigurationSerializer.Load();
             recommendations = new ObservableCollection<RecommendationViewModel>();
         }
 
@@ -98,7 +98,8 @@ namespace NewsStand.UI.ReadLater.ViewModels
                                                   RecommendationViewModel.FromModel(
                                                       current,
                                                       users.Followings.Single(
-                                                          c => c.Id == current.UserId))), token,
+                                                          c => c.Id == current.UserId),
+                                                          settings.Font)), token,
                                                                     TaskCreationOptions.None, context);
                                           }
                                       }).ContinueWith(_ => IsBusy = false, context);

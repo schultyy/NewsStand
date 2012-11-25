@@ -158,7 +158,21 @@ namespace NewsStand.UI.Shared.ViewModels
             }
         }
 
-        public static RecommendationViewModel FromModel(Recommendation model, User user, bool isRead = false)
+        private string font;
+
+        public string Font
+        {
+            get { return font; }
+            set
+            {
+                if (font == value)
+                    return;
+                font = value;
+                NotifyOfPropertyChange(() => Font);
+            }
+        }
+
+        public static RecommendationViewModel FromModel(Recommendation model, User user, string font, bool isRead = false)
         {
             var avatar = ServiceLocator.Current.GetInstance<IAvatarService>().LoadAvatar(user.AvatarUrl);
             return new RecommendationViewModel
@@ -172,7 +186,8 @@ namespace NewsStand.UI.Shared.ViewModels
                 WebsiteUrl = model.WebsiteUrl,
                 Avatar = avatar,
                 Id = model.Id,
-                IsRead = isRead
+                IsRead = isRead,
+                Font = font
             };
         }
     }

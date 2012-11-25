@@ -35,7 +35,7 @@
                     </Hyperlink>
                 </Label>
             </StackPanel>
-            <TextBlock FontSize="16" FontFamily="Times New Roman"
+            <TextBlock FontSize="16" FontFamily="{Binding Font}"
                                            DockPanel.Dock="Top" Margin="10"
                                    TextAlignment="Left" TextWrapping="Wrap">
                                     <TextBlock.Text>

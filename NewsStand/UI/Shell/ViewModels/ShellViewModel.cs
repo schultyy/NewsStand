@@ -14,7 +14,7 @@ namespace NewsStand.UI.Shell.ViewModels
     {
         public ShellViewModel()
         {
-            if (ConfigurationSerializer.Load<Settings>() == null)
+            if (ConfigurationSerializer.Load() == null)
             {
                 DisplayName = "NewsStand";
                 var usernameModel = new UsernameViewModel();
@@ -36,7 +36,7 @@ namespace NewsStand.UI.Shell.ViewModels
             Items.Add(new ReadLaterListViewModel());
             Items.Add(new ConfigurationViewModel());
             ActivateItem(Items.First());
-            DisplayName = string.Format("NewsStand - {0}", ConfigurationSerializer.Load<Settings>().Username);
+            DisplayName = string.Format("NewsStand - {0}", ConfigurationSerializer.Load().Username);
         }
     }
 }
