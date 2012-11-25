@@ -15,20 +15,11 @@
                 <DataTemplate>
                     <Border CornerRadius="2" 
                             BorderBrush="Black" 
-                            BorderThickness="0.5"
+                            BorderThickness="0"
                             Height="32"
                             Width="32">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#E8E8E8" Offset="0" />
-                                <GradientStop Color="Silver" Offset="0.25" />
-                                <GradientStop Color="#A9A7A7" Offset="0.5" />
-                                <GradientStop Color="#636363" Offset="0.75" />
-                                <GradientStop Color="#E8E8E8" Offset="1" />
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Foreground="White" FontSize="16" Text="{Binding DisplayName}"
-                                   FontFamily="Georgia"
+                        <TextBlock Foreground="Black" FontSize="16" Text="{Binding DisplayName}"
+                                   FontFamily="Arial"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    TextAlignment="Center"/>
