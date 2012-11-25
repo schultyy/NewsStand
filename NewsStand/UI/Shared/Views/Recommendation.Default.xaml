@@ -25,15 +25,11 @@
                         <TextBlock Text="{Binding ArticleTitle}" />
                     </Hyperlink>
                 </Label>
-                <TextBlock Text=" from " Margin="0 5 0 0" />
-                <Label Margin="0">
-                    <Hyperlink NavigateUri="{Binding WebsiteUrl}">
-                        <i:Interaction.Behaviors>
-                            <behaviors:HyperlinkNavigationBehavior />
-                        </i:Interaction.Behaviors>
-                        <TextBlock Text="{Binding WebsiteTitle}" />
-                    </Hyperlink>
-                </Label>
+                <TextBlock Margin="0 5 0 0">
+                    <TextBlock.Text>
+                        <Binding Path="WebsiteTitle" StringFormat="from {0}" />
+                    </TextBlock.Text>
+                </TextBlock>
             </StackPanel>
             <TextBlock FontSize="16" FontFamily="{Binding Font}"
                                            DockPanel.Dock="Top" Margin="10"
