@@ -12,7 +12,8 @@
                              Margin="5">
         <DockPanel LastChildFill="True">
             <Image Source="{Binding Avatar}" DockPanel.Dock="Left" Width="64" Height="64"
-                                           Margin="5" />
+                    VerticalAlignment="Top"
+                    Margin="5"/>
             <StackPanel Margin="5" DockPanel.Dock="Top"
                                         Orientation="Horizontal">
                 <TextBlock Text="{Binding User.Fullname}" Margin="0 5 0 0" />
