@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -26,8 +27,14 @@ namespace NewsStand
 
             ConfigurationSerializer.CheckFolder();
 
+            dynamic settings = new ExpandoObject();
+            settings.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            settings.Width = 800;
+            settings.Height = 600;
+            settings.SizeToContent = SizeToContent.Manual;
+
             var windowManager = IoC.Get<IWindowManager>();
-            windowManager.ShowDialog(new ShellViewModel());
+            windowManager.ShowDialog(new ShellViewModel(), null, settings);
         }
 
         void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
